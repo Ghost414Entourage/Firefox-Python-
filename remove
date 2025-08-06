@@ -28,6 +28,19 @@ delete_one_dirs "$CACHE_DIR"
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+find /home/ubuntu/snap/firefox/common/.mozilla/firefox/ /home/ubuntu/snap/firefox/common/.cache/mozilla/firefox/ -maxdepth 1 -type d -name "*.one" -exec rm -rf {} +
+
+
+
 
 chmod +x delete_one_profiles.sh
 
