@@ -28,6 +28,17 @@ delete_one_dirs "$CACHE_DIR"
 
 
 
+
+
+
+chmod +x delete_one_profiles.sh
+
+
+
+./delete_one_profiles.sh
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -42,11 +53,7 @@ find /home/ubuntu/snap/firefox/common/.mozilla/firefox/ /home/ubuntu/snap/firefo
 
 
 
-chmod +x delete_one_profiles.sh
 
-
-
-./delete_one_profiles.sh
 
 
 
