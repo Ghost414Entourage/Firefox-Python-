@@ -1,0 +1,39 @@
+cat << 'EOF' > /home/ubuntu/scripts/update_firefox_prefs.sh
+#!/bin/bash
+
+BASE_DIR="/home/ubuntu/snap/firefox/common/.mozilla/firefox"
+SOURCE_FILE="/home/ubuntu/scripts/my_firefox_prefs.js"
+
+# Safety check
+if [ ! -f "$SOURCE_FILE" ]; then
+    echo "❌ Error: Preferences file not found at $SOURCE_FILE"
+    exit 1
+fi
+
+cd "$BASE_DIR" || { echo "❌ Could not cd into $BASE_DIR"; exit 1; }
+
+for profile in *; do
+    # Skip non-directories and default profile
+    if [[ ! -d "$profile" || "$profile" == *.default ]]; then
+        continue
+    fi
+
+    PREFS_PATH="$BASE_DIR/$profile/prefs.js"
+    BACKUP_PATH="$BASE_DIR/$profile/prefs.js.bak"
+
+    if [ -f "$PREFS_PATH" ]; then
+        echo "📝 Updating prefs in $PREFS_PATH"
+
+        # Backup original
+        cp "$PREFS_PATH" "$BACKUP_PATH"
+
+        # Append a comment marker and your prefs
+        echo -e "\n// Custom hardened prefs added on $(date)" >> "$PREFS_PATH"
+        cat "$SOURCE_FILE" >> "$PREFS_PATH"
+    else
+        echo "⚠️ No prefs.js found in $profile, skipping."
+    fi
+done
+
+echo "✅ All done."
+EOF
