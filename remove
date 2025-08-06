@@ -1,0 +1,41 @@
+nano delete_one_profiles.sh
+
+
+
+
+#!/bin/bash
+
+# Define base directories
+PROFILE_DIR="/home/ubuntu/snap/firefox/common/.mozilla/firefox"
+CACHE_DIR="/home/ubuntu/snap/firefox/common/.cache/mozilla/firefox"
+
+# Function to delete .one directories in a given path
+delete_one_dirs() {
+    local dir="$1"
+    echo "🔍 Scanning: $dir"
+    if [ -d "$dir" ]; then
+        find "$dir" -maxdepth 1 -type d -name "*.one" -exec rm -rf {} \;
+        echo "✅ Deleted .one directories in $dir"
+    else
+        echo "⚠️ Directory not found: $dir"
+    fi
+}
+
+# Run deletions
+delete_one_dirs "$PROFILE_DIR"
+delete_one_dirs "$CACHE_DIR"
+
+
+
+
+
+chmod +x delete_one_profiles.sh
+
+
+
+./delete_one_profiles.sh
+
+
+
+
+
